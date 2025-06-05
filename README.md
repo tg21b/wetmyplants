@@ -9,5 +9,6 @@ An automated plant watering system implemented in C with MSP430FR5994.
 
 The first step will be to write driver libraries for the moisture sensor and the LCD. Most likely going to use the LCD to display the moisture level and maybe a little text about the status.
 
-General Block Diagram:
+## General Block Diagram:
+
 ![Image](https://github.com/user-attachments/assets/ea2e4262-6ae7-450b-8a80-e2e081142496)``
