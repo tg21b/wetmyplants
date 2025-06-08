@@ -1,0 +1,6 @@
+# FIXED
+
+msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/usci_a_uart/usci_a_uart_ex4_idleLineMultiprocessorRX.obj: ../msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/usci_a_uart/usci_a_uart_ex4_idleLineMultiprocessorRX.c
+
+../msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/usci_a_uart/usci_a_uart_ex4_idleLineMultiprocessorRX.c:
+

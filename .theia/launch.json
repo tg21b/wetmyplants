@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "CCS Debug",
+            "type": "ccs-debug",
+            "request": "launch"
+        },
+        {
+            "name": "plant_watering",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "plant_watering",
+                "resourceId": "/plant_watering"
+            }
+        }
+    ]
+}

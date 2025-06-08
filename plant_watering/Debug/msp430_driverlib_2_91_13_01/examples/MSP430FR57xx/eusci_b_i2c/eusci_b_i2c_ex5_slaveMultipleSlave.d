@@ -1,0 +1,6 @@
+# FIXED
+
+msp430_driverlib_2_91_13_01/examples/MSP430FR57xx/eusci_b_i2c/eusci_b_i2c_ex5_slaveMultipleSlave.obj: ../msp430_driverlib_2_91_13_01/examples/MSP430FR57xx/eusci_b_i2c/eusci_b_i2c_ex5_slaveMultipleSlave.c
+
+../msp430_driverlib_2_91_13_01/examples/MSP430FR57xx/eusci_b_i2c/eusci_b_i2c_ex5_slaveMultipleSlave.c:
+
