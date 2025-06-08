@@ -178,5 +178,10 @@
       "directory" : "C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering/Debug",
       "command"   : "clang++ -I\"C:/ti/ccs2020/ccs/ccs_base/msp430/include\" -I\"C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering\" -I\"C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR5994__ -D_MPU_ENABLE -xc",
       "file"      : "C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering/msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/wdt_a.c"
+   },
+   {
+      "directory" : "C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering/Debug",
+      "command"   : "clang++ -I\"C:/ti/ccs2020/ccs/ccs_base/msp430/include\" -I\"C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering\" -I\"C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include\" -D__MSP430FR5994__ -D_MPU_ENABLE -xc",
+      "file"      : "C:/Users/Windows 10 PRO/workspace_ccstheia/plant_watering/HAL_UART_4746.c"
    }
 ]

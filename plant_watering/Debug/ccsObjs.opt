@@ -1,3 +1,4 @@
+"./HAL_UART_4746.obj"
 "./main.obj"
 "./msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/adc12_b.obj"
 "./msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/aes256.obj"

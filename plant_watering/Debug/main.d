@@ -55,6 +55,9 @@ main.obj: ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/hspll.h
 main.obj: ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/eusci_b_spi.h
 main.obj: ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/sdhs.h
 main.obj: ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/crc.h
+main.obj: C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h
+main.obj: C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h
+main.obj: ../HAL_UART_4746.h
 
 ../main.c:
 
@@ -165,4 +168,10 @@ C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdbool.h:
 ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/sdhs.h:
 
 ../msp430_driverlib_2_91_13_01/driverlib/MSP430FR5xx_6xx/crc.h:
+
+C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdio.h:
+
+C:/ti/ccs2020/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include/stdarg.h:
+
+../HAL_UART_4746.h:
 
