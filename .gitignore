@@ -1,0 +1,13 @@
+# Ignore CCS-generated files
+*.launch
+*.log
+*.bin
+*.elf
+*.map
+*.out
+*.d
+*.obj
+Debug/
+Release/
+.settings/
+.metadata/
