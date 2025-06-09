@@ -11,15 +11,27 @@ int main(void)
 {
 
     char buffer[100];
-    UART_initGPIO();
-    UART_init();
+    //UART_initGPIO();
+    //UART_init();
 
     msp430init();
 
     initADC();
 
-    sprintf(buffer, "Hello");
-    UART_transmitString(buffer);
+    //sprintf(buffer, "Moisture Sensor Reading: \n");       //testing output with UART
+    //UART_transmitString(buffer);
+
+    GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN1);
+    uint16_t moisture; 
+    while(1){
+        /*moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
+        sprintf(buffer, "%d", moisture);
+        UART_transmitString(buffer);
+        sprintf(buffer, "\n");
+        UART_transmitString(buffer);*/
+        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN1);
+        __delay_cycles(100000);
+    }
 
 }
 
