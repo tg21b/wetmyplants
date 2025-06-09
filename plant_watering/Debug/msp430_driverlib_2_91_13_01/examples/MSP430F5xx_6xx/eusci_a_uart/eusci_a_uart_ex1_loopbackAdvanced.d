@@ -1,6 +1,0 @@
-# FIXED
-
-msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/eusci_a_uart/eusci_a_uart_ex1_loopbackAdvanced.obj: ../msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/eusci_a_uart/eusci_a_uart_ex1_loopbackAdvanced.c
-
-../msp430_driverlib_2_91_13_01/examples/MSP430F5xx_6xx/eusci_a_uart/eusci_a_uart_ex1_loopbackAdvanced.c:
-
