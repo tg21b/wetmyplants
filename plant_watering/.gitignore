@@ -7,7 +7,7 @@
 *.out
 *.d
 *.obj
-Debug/
+./Debug/
 Release/
 .settings/
 .metadata/
