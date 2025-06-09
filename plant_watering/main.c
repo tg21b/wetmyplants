@@ -10,7 +10,7 @@ void initADC();
 int main(void)
 {
 
-    char buffer[100];
+    //char buffer[100];
     //UART_initGPIO();
     //UART_init();
 
