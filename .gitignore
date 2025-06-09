@@ -7,7 +7,7 @@
 *.out
 *.d
 *.obj
-Debug/
+./plant_watering/Debug/
 Release/
 .settings/
 .metadata/
