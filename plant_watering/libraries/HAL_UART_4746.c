@@ -35,7 +35,7 @@
 //
 //****************************************************************************
 
-#include ".\msp430_driverlib_2_91_13_01\driverlib\MSP430FR5xx_6xx\driverlib.h"
+#include ".\libraries\msp430_driverlib_2_91_13_01\driverlib\MSP430FR5xx_6xx\driverlib.h"
 #include "HAL_UART_4746.h"
 
 

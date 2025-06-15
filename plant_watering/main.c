@@ -1,8 +1,8 @@
 
 #include <msp430.h>
-#include ".\msp430_driverlib_2_91_13_01\driverlib\MSP430FR5xx_6xx\driverlib.h"
+#include ".\libraries\msp430_driverlib_2_91_13_01\driverlib\MSP430FR5xx_6xx\driverlib.h"
 #include <stdio.h>
-#include "HAL_UART_4746.h"
+#include "C:\Users\Windows 10 PRO\workspace_ccstheia\plant_watering\libraries\HAL_UART_4746.h"
 
 void msp430init();      //disabling WDT and 
 void initADC();
@@ -10,27 +10,44 @@ void initADC();
 int main(void)
 {
 
-    //char buffer[100];
-    //UART_initGPIO();
-    //UART_init();
 
     msp430init();
-
+    UART_initGPIO();
+    UART_init();
     initADC();
 
-    //sprintf(buffer, "Moisture Sensor Reading: \n");       //testing output with UART
-    //UART_transmitString(buffer);
-
     GPIO_setAsOutputPin(GPIO_PORT_P1, GPIO_PIN1);
-    uint16_t moisture; 
+    char buffer[100];
+    uint16_t moisture;
+    uint16_t prev_moisture;
+
+     sprintf(buffer, "Moisture: ");
+
+    UART_transmitString(buffer);
+
+    //---------------------------------------------GET INITIAL MOISTURE READING---------------------------------------------------------------------------------------------------
+    ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
+    // Wait for conversion to finish
+    while (!ADC12_B_getInterruptStatus(ADC12_B_BASE, 0, ADC12_B_IFG0));
+    // Read result
+    prev_moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
+
+
+//------------------------------------------MAIN WHILE LOOP---------------------------------------------------------------------------------------------------------
     while(1){
-        /*moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
-        sprintf(buffer, "%d", moisture);
-        UART_transmitString(buffer);
-        sprintf(buffer, "\n");
-        UART_transmitString(buffer);*/
-        GPIO_toggleOutputOnPin(GPIO_PORT_P1, GPIO_PIN1);
-        __delay_cycles(100000);
+        ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
+        while (!ADC12_B_getInterruptStatus(ADC12_B_BASE, 0, ADC12_B_IFG0));
+        moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
+
+        //only print if new moisture value is 40 more or less than the previous value
+        if ((moisture >= prev_moisture + 40) || (moisture <= prev_moisture - 40)){
+            sprintf(buffer, "Moisture: %d\r\n", moisture);
+            UART_transmitString(buffer);
+            prev_moisture = moisture;
+        }
+
+        //prev_moisture = moisture;
+        __delay_cycles(50000);
     }
 
 }
@@ -78,5 +95,5 @@ void initADC(){
 
     ADC12_B_configureMemory(ADC12_B_BASE, &configParam);
 
-    ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
+    //ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
 }
