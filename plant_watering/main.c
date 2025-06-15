@@ -6,6 +6,7 @@
 
 void msp430init();      //disabling WDT and 
 void initADC();
+uint16_t adcConversion();
 
 int main(void)
 {
@@ -21,23 +22,14 @@ int main(void)
     uint16_t moisture;
     uint16_t prev_moisture;
 
-     sprintf(buffer, "Moisture: ");
-
+    prev_moisture = adcConversion();        //get initial moisture reading
+    sprintf(buffer, "Moisture: %d\r\n", prev_moisture);
     UART_transmitString(buffer);
 
-    //---------------------------------------------GET INITIAL MOISTURE READING---------------------------------------------------------------------------------------------------
-    ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
-    // Wait for conversion to finish
-    while (!ADC12_B_getInterruptStatus(ADC12_B_BASE, 0, ADC12_B_IFG0));
-    // Read result
-    prev_moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
-
-
-//------------------------------------------MAIN WHILE LOOP---------------------------------------------------------------------------------------------------------
+//------------------------------------------MAIN WHILE LOOP-----------------------------------------------------------------------------------------------------------------------
     while(1){
-        ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
-        while (!ADC12_B_getInterruptStatus(ADC12_B_BASE, 0, ADC12_B_IFG0));
-        moisture = ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);
+
+        moisture = adcConversion();
 
         //only print if new moisture value is 40 more or less than the previous value
         if ((moisture >= prev_moisture + 40) || (moisture <= prev_moisture - 40)){
@@ -46,29 +38,42 @@ int main(void)
             prev_moisture = moisture;
         }
 
-        //prev_moisture = moisture;
         __delay_cycles(50000);
     }
 
 }
 
+
+/*
+msp430init
+paramaters: none
+returns: none
+
+initialize msp430, configuring any necessary pins
+*/
 void msp430init(){
-     WDTCTL = WDTPW | WDTHOLD;               // Stop WDT
-     PM5CTL0 &= ~LOCKLPM5;                   // Disable the GPIO power-on default high-impedance mode to activate previously configured port settings
+    WDTCTL = WDTPW | WDTHOLD;               // stop WDT
+    PM5CTL0 &= ~LOCKLPM5;                   // disable the GPIO power-on default high-impedance mode to activate previously configured port settings
+    GPIO_setAsPeripheralModuleFunctionInputPin(
+        GPIO_PORT_P1, 
+        GPIO_PIN2,
+        GPIO_TERNARY_MODULE_FUNCTION);
 }
 
 
 /*
 initADC
+paramaters: none
+returns: none
 
-initalizes the ADC on pin P1.2, where the soil moisture sensor is connected
+configures the ADC on pin P1.2, where the soil moisture sensor is connected
 
 */
 void initADC(){
-    GPIO_setAsPeripheralModuleFunctionInputPin(
+    /*GPIO_setAsPeripheralModuleFunctionInputPin(
     GPIO_PORT_P1, 
     GPIO_PIN2,
-    GPIO_TERNARY_MODULE_FUNCTION);
+    GPIO_TERNARY_MODULE_FUNCTION);*/
 
     ADC12_B_initParam initParam = {0};
     initParam.sampleHoldSignalSourceSelect = ADC12_B_SAMPLEHOLDSOURCE_SC;
@@ -94,6 +99,18 @@ void initADC(){
     configParam.endOfSequence = ADC12_B_NOTENDOFSEQUENCE;
 
     ADC12_B_configureMemory(ADC12_B_BASE, &configParam);
+}
 
-    //ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);
+/*
+adcConversion
+paramaters: none
+returns: uint16_t
+
+function for performing ADC conversion to get moisture reading
+
+*/
+uint16_t adcConversion(){
+    ADC12_B_startConversion(ADC12_B_BASE, ADC12_B_START_AT_ADC12MEM0, ADC12_B_SINGLECHANNEL);         //start conversion
+    while (!ADC12_B_getInterruptStatus(ADC12_B_BASE, 0, ADC12_B_IFG0));                               // wait for conversion to finish
+    return ADC12_B_getResults(ADC12_B_BASE, ADC12_B_MEMORY_0);                                                      // read result
 }
